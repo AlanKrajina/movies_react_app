@@ -8,35 +8,23 @@ const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
 
 class Movies extends Component {
    
-    constructor(props){
-        super(props);
-        this.state = {
-            reviews: [],
-        }
-      }
+  state = {
+    reviews: []
+  }
 
-      componentDidMount() {
-        fetch(URL)
-          .then(response => response.json())
-          .then(reviewsData => this.setState({ reviews: reviewsData.results }))
-      }
+  componentDidMount() {
+    fetch(URL)
+      .then(response => response.json())
+      .then(reviewsData => this.setState({ reviews: reviewsData.results }))
+  }
 
-
-      handleLikeClick = () => {
-        this.setState({
-            likes: this.state.likes + 1
-        })
-      }
-
-
-// ovdje mogu mapirat i prikazat sa jednim <MovieCard/> u returnu - gotovo
   render() {
-        const reviewCard = this.state.reviews.map(review => 
-        <div className="test">
-            <MovieCard  
-            review={review} 
-            />
-        </div>)  
+    const reviewCard = this.state.reviews.map(review => 
+    <div className="test">
+        <MovieCard  
+        review={review} 
+        />
+    </div>)  
 
     return (
       <div>
@@ -52,3 +40,11 @@ class Movies extends Component {
 
 export default Movies;
           
+
+/*
+
+if img je kliknuta onda pretvara review u jedan review koji je findan
+
+
+to u moviecard napravit da finda i onda kreira unutar img? ili da rendera ShowMovie
+*/

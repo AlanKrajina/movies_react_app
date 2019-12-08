@@ -1,14 +1,10 @@
-//import React from 'react'
 import React, { Component } from "react";
 
 class MovieCard extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            likes: 0,
-            review: this.props.review
-        }
+      state = {
+        likes: 0,
+        review: this.props.review
       }
 
       handleLikeClick = () => {
@@ -26,10 +22,13 @@ class MovieCard extends Component {
       render() {
 
     return (
+
       <div>
         <img
             src={this.state.review.multimedia.src}
             alt={this.state.review.display_title}
+
+            // slozit tako da kada klikne na film da on apsolute se pokaze na sredini
         />
         <h3>Title</h3>
         <p>{this.state.review.display_title}</p>
