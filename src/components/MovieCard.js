@@ -1,52 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 
-class MovieCard extends Component {
+const MovieCard = ({review,handleDislikeClick,handleLikeClick,likes}) => {
 
-      state = {
-        likes: 0,
-        review: this.props.review
-      }
-
-      handleLikeClick = () => {
-        this.setState({
-            likes: this.state.likes + 1
-        })
-      }
-
-      handleDislikeClick = () => {
-        this.setState({
-            likes: this.state.likes - 1
-        })
-      }
-
-      render() {
-
-    return (
-
+	  return (                
       <div>
         <img
-            src={this.state.review.multimedia.src}
-            alt={this.state.review.display_title}
+            src={review.multimedia.src}
+            alt={review.display_title}
 
             // slozit tako da kada klikne na film da on apsolute se pokaze na sredini
         />
         <h3>Title</h3>
-        <p>{this.state.review.display_title}</p>
+        <p>{review.display_title}</p>
         <h4>Headline</h4>
-        <p>{this.state.review.headline}</p>
+        <p>{review.headline}</p>
         <h4>Summary</h4>
-        <p>{this.state.review.summary_short}</p>
-        <button onClick={this.handleLikeClick}>Add like</button>
-        <button onClick={this.handleDislikeClick}>Add dislike</button>
+        <p>{review.summary_short}</p>
+        <button onClick={handleLikeClick}>Add like</button>
+        <button onClick={handleDislikeClick}>Add dislike</button>
 
-        <p>Likes: {this.state.likes}</p>
+        <p>Likes: {likes}</p>
       </div>
-    );
-  }
+	)
 }
 
+export default MovieCard; 
 
-export default MovieCard;
+
+
+
 
 
 

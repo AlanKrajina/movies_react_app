@@ -9,7 +9,8 @@ const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
 class Movies extends Component {
    
   state = {
-    reviews: []
+    reviews: [],
+    likes: 0
   }
 
   componentDidMount() {
@@ -18,11 +19,27 @@ class Movies extends Component {
       .then(reviewsData => this.setState({ reviews: reviewsData.results }))
   }
 
+  handleLikeClick = () => {
+    this.setState({
+        likes: this.state.likes + 1
+    })
+  }
+
+  handleDislikeClick = () => {
+    this.setState({
+        likes: this.state.likes - 1
+    })
+  }
+
+
   render() {
     const reviewCard = this.state.reviews.map(review => 
     <div className="test">
         <MovieCard  
         review={review} 
+        likes={this.state.likes}
+        handleLikeClick={this.handleLikeClick}
+        handleDislikeClick={this.handleDislikeClick}
         />
     </div>)  
 
