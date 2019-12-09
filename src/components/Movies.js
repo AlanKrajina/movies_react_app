@@ -6,11 +6,14 @@ const NYT_API_KEY = 'Pf2z1uTtMAwdSsefhofGywWzMAAxdjbz';
 const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
             + `api-key=${NYT_API_KEY}`;
 
+const searchURL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?"
+                  + `api-key=${NYT_API_KEY}&query=`;
+
 class Movies extends Component {
    
   state = {
     reviews: [],
-    likes: 0
+    test: false,
   }
 
   componentDidMount() {
@@ -19,16 +22,15 @@ class Movies extends Component {
       .then(reviewsData => this.setState({ reviews: reviewsData.results }))
   }
 
-  handleLikeClick = () => {
-    this.setState({
-        likes: this.state.likes + 1
-    })
+  handleSubmit = event => {
+    event.preventDefault()
+    this.fetchReviews(this.state.searchTerm) 
   }
 
-  handleDislikeClick = () => {
-    this.setState({
-        likes: this.state.likes - 1
-    })
+  fetchReviews = (searchTerm) => {
+    fetch(searchURL.concat(searchTerm))
+        .then(res => res.json())
+        .then(data => this.setState({ reviews: data.results })); // array of objects
   }
 
 
@@ -37,31 +39,29 @@ class Movies extends Component {
     <div className="test">
         <MovieCard  
         review={review} 
-        likes={this.state.likes}
-        handleLikeClick={this.handleLikeClick}
-        handleDislikeClick={this.handleDislikeClick}
         />
     </div>)  
 
-    return (
+return (
+  <div>
       <div>
-         <Grid 
+        <form onSubmit={this.handleSubmit}>
+          <input
+          type="text"
+          value={this.state.searchTerm}
+          onChange={event => this.setState({searchTerm: event.target.value})}/>
+        <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div>
+        <Grid 
           width={320}
           gap={20}>
               { reviewCard }
-          </Grid>
+        </Grid>
       </div>
-    );
-  }
-}
+      </div>
+  )
+}}
 
-export default Movies;
-          
-
-/*
-
-if img je kliknuta onda pretvara review u jedan review koji je findan
-
-
-to u moviecard napravit da finda i onda kreira unutar img? ili da rendera ShowMovie
-*/
+export default Movies;  
