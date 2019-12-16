@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchedMovieCard from "./SearchedMovieCard";
+import Example from "./Hook";
 
 class MovieCard extends Component {
    
@@ -38,6 +39,7 @@ class MovieCard extends Component {
         <button onClick={this.handleDislikeClick}>Add dislike</button>
         <p>Likes: {this.state.likes}</p>
         <SearchedMovieCard reviews={this.state.reviews} />
+        <Example />
       </div>
     )
   }
