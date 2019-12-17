@@ -25,6 +25,7 @@ class Movies extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.fetchReviews(this.state.searchTerm) 
+    console.log("Input Value: ", this.input.current.value)
   }
 
   fetchReviews = (searchTerm) => {
@@ -32,6 +33,10 @@ class Movies extends Component {
         .then(res => res.json())
         .then(data => this.setState({ reviews: data.results })); // array of objects
   }
+
+
+  input = React.createRef()
+// uncontrolled component console error
 
 
   render() {
@@ -49,6 +54,7 @@ return (
           <input
           type="text"
           value={this.state.searchTerm}
+          ref={this.input}
           onChange={event => this.setState({searchTerm: event.target.value})}/>
         <button type="submit">Submit</button>
         </form>
