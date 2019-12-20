@@ -6,7 +6,8 @@ class MovieCard extends Component {
    
   state = {
     reviews: this.props.review,
-    likes: 0
+    likes: 0,
+    color: "blue"
   }
 
    handleLikeClick = () => {
@@ -21,6 +22,22 @@ class MovieCard extends Component {
     })
   } 
 
+  click = () => {
+    if (this.state.color === "blue"){
+      return(
+        this.setState({
+          color: "red"
+        })
+      )
+    } else {
+      return(
+        this.setState({
+          color: "blue"
+        })
+      )
+    }
+  }
+
   render() {
 
     return (                
@@ -30,7 +47,8 @@ class MovieCard extends Component {
             alt={this.state.reviews.reviewdisplay_title}
         />
         <h3>Title</h3>
-        <p>{this.state.reviews.display_title}</p>
+        <p style={{color: this.state.color}} onClick={this.click}>{this.state.reviews.display_title}</p>
+        <button onClick={this.click}>click</button>
         <h4>Headline</h4>
         <p>{this.state.reviews.headline}</p>
         <h4>Summary</h4>
