@@ -7,7 +7,8 @@ class MovieCard extends Component {
   state = {
     reviews: this.props.review,
     likes: 0,
-    color: "blue"
+    color: "blue",
+    cond: true
   }
 
    handleLikeClick = () => {
@@ -38,6 +39,11 @@ class MovieCard extends Component {
     }
   }
 
+  click2 = () => {
+    this.state.cond ? this.setState({color: "green", cond: false}) : this.setState({color: "yellow", cond: true})
+
+  }
+
   render() {
 
     return (                
@@ -46,9 +52,9 @@ class MovieCard extends Component {
             src={this.state.reviews.multimedia.src}
             alt={this.state.reviews.reviewdisplay_title}
         />
-        <h3>Title</h3>
+        <h3 style={{color: this.state.color}}>Title</h3>
         <p style={{color: this.state.color}} onClick={this.click}>{this.state.reviews.display_title}</p>
-        <button onClick={this.click}>click</button>
+        <button onClick={this.click2}>click</button>
         <h4>Headline</h4>
         <p>{this.state.reviews.headline}</p>
         <h4>Summary</h4>
