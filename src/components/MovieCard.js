@@ -7,7 +7,6 @@ class MovieCard extends Component {
   state = {
     reviews: this.props.review,
     likes: 0,
-    color: "blue",
     cond: true
   }
 

@@ -35,9 +35,9 @@ class Movies extends Component {
   }
 
 
-  input = React.createRef()
-// uncontrolled component console error
-
+//  input = React.createRef()
+//  uncontrolled component console error
+//  ref={this.input}
 
   render() {
     const reviewCard = this.state.reviews.map(review => 
@@ -54,7 +54,6 @@ return (
           <input
           type="text"
           value={this.state.searchTerm}
-          ref={this.input}
           onChange={event => this.setState({searchTerm: event.target.value})}/>
         <button type="submit">Submit</button>
         </form>
