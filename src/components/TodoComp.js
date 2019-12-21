@@ -6,6 +6,9 @@ const TodoComp = (props) => {
         <li key={index}>
             <li>{entry.text}</li>
             <button onClick={()=>props.deleteItem(index)}>x</button>
+            <button onClick={()=>props.moveUp(index)}>up</button>
+            <button onClick={()=>props.moveDown(index)}>down</button>
+
         </li>
         ))
 

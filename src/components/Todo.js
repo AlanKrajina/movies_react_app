@@ -7,7 +7,9 @@ class Todo extends Component {
         items: [],
       }
 
+
 // add
+
     addItem = e => {
         e.preventDefault()
 
@@ -24,11 +26,7 @@ class Todo extends Component {
         }
         
         
-
 // delete 
-/*     deleteItem = (index) => {
-      return this.setState({items: [...this.state.items].splice(index, 1)})
-    } */
 
     deleteItem = (index) => {
       this.setState(prevState => ({
@@ -37,6 +35,35 @@ class Todo extends Component {
     };
 
 
+// move up-down <li>
+
+    moveUp = (index) => {
+      let duplicateState = {...this.state.items}
+      let previousItem = duplicateState[index -1]
+      let itemToBeMoved = duplicateState[index]
+      duplicateState[index -1] = itemToBeMoved
+      duplicateState[index] = previousItem
+      this.setState({
+        items: duplicateState
+      });
+    }
+
+    moveDown = (index) => {
+      let newduplicateState = this.state.items.slice() // created new array
+
+                                                       // finding items:
+      let goesUpItem = newduplicateState[index]        // created first item we clicked and found with index -> on newduplicateState array
+
+      let goesDownItem = newduplicateState[index +1]   // created ABOVE second item we found using one index level up -> on newduplicateState array
+
+                                                       // position switch:
+      newduplicateState[index +1] = goesUpItem         // clicked itemToBeMoved moved UP to new position on array 
+      newduplicateState[index] = goesDownItem          // previous item that was UP now moved DOWN to new position on array (where itemToBeMoved was)
+
+      this.setState({
+        items: newduplicateState
+      });
+    }
 
     render() {
         return (
@@ -53,7 +80,7 @@ class Todo extends Component {
               </form>
 
             </div>
-              <TodoComp entries={this.state.items} deleteItem={this.deleteItem}/>
+              <TodoComp entries={this.state.items} deleteItem={this.deleteItem} moveUp={this.moveUp} moveDown={this.moveDown}/>
           </div>
         );
       }
