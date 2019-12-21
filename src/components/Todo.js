@@ -7,7 +7,7 @@ class Todo extends Component {
         items: [],
       }
 
-    
+// add
     addItem = e => {
         e.preventDefault()
 
@@ -20,8 +20,22 @@ class Todo extends Component {
               items: prevState.items.concat(newItem) 
             };
           });     
+          this.setState({text:''})
         }
-         
+        
+        
+
+// delete 
+/*     deleteItem = (index) => {
+      return this.setState({items: [...this.state.items].splice(index, 1)})
+    } */
+
+    deleteItem = (index) => {
+      this.setState(prevState => ({
+        items: prevState.items.filter((_, i) => i !== index) //Filter the items and sets new items without the one selected to delete === index
+      }));
+    };
+
 
 
     render() {
@@ -39,7 +53,7 @@ class Todo extends Component {
               </form>
 
             </div>
-              <TodoComp entries={this.state.items}/>
+              <TodoComp entries={this.state.items} deleteItem={this.deleteItem}/>
           </div>
         );
       }

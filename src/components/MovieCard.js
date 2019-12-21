@@ -10,6 +10,8 @@ class MovieCard extends Component {
     cond: true
   }
 
+
+// increment decrement  
    handleLikeClick = () => {
     this.setState({
         likes: this.state.likes + 1
@@ -22,6 +24,8 @@ class MovieCard extends Component {
     })
   } 
 
+
+// style change:
   click = () => {
     if (this.state.color === "blue"){
       return(
@@ -42,6 +46,7 @@ class MovieCard extends Component {
     this.state.cond ? this.setState({color: "green", cond: false}) : this.setState({color: "yellow", cond: true})
 
   }
+
 
   render() {
 
@@ -70,30 +75,3 @@ class MovieCard extends Component {
 
 export default MovieCard;   
 
-/* 
-import React from "react";
-
-const MovieCard = ({review,handleDislikeClick,handleLikeClick,likes}) => {
-
-	  return (                
-      <div>
-        <img
-            src={review.multimedia.src}
-            alt={review.display_title}
-
-        />
-        <h3>Title</h3>
-        <p>{review.display_title}</p>
-        <h4>Headline</h4>
-        <p>{review.headline}</p>
-        <h4>Summary</h4>
-        <p>{review.summary_short}</p>
-        <button onClick={handleLikeClick}>Add like</button>
-        <button onClick={handleDislikeClick}>Add dislike</button>
-
-        <p>Likes: {likes}</p>
-      </div>
-	)
-}
-
-export default MovieCard;  */
