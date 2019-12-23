@@ -30,7 +30,7 @@ class Todo extends Component {
 
     deleteItem = (index) => {
       this.setState(prevState => ({
-        items: prevState.items.filter((_, i) => i !== index) //Filter the items and sets new items without the one selected to delete === index
+        items: prevState.items.filter((_, i) => i !== index) 
       }));
     };
 
