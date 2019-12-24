@@ -35,9 +35,6 @@ class Movies extends Component {
   }
 
 
-//  input = React.createRef()
-//  uncontrolled component console error
-//  ref={this.input}
 
   render() {
     const reviewCard = this.state.reviews.map(review => 
