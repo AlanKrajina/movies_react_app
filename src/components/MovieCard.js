@@ -5,10 +5,9 @@ import Example from "./Hook";
 class MovieCard extends Component {
    
   state = {
-    reviews: this.props.review,
     likes: 0,
     cond: true
-  }
+    }
 
 
 // increment decrement  
@@ -48,30 +47,35 @@ class MovieCard extends Component {
   }
 
 
+
   render() {
 
     return (                
       <div>
         <img
-            src={this.state.reviews.multimedia.src}
-            alt={this.state.reviews.reviewdisplay_title}
+            src={this.props.review.multimedia.src}
+            alt={this.props.review.reviewdisplay_title}
         />
         <h3 style={{color: this.state.color}}>Title</h3>
-        <p style={{color: this.state.color}} onClick={this.click}>{this.state.reviews.display_title}</p>
+        <p style={{color: this.state.color}} onClick={this.click}>{this.props.review.display_title}</p>
         <button onClick={this.click2}>click</button>
         <h4>Headline</h4>
-        <p>{this.state.reviews.headline}</p>
+        <p>{this.props.review.headline}</p>
         <h4>Summary</h4>
-        <p>{this.state.reviews.summary_short}</p>
+        <p>{this.props.review.summary_short}</p>
+        <div>
+        <a href={this.props.review.link.url}>Movie link</a>
+        </div>
         <button onClick={this.handleLikeClick}>Add like</button>
         <button onClick={this.handleDislikeClick}>Add dislike</button>
         <p>Likes: {this.state.likes}</p>
-        <SearchedMovieCard reviews={this.state.reviews} />
+        <SearchedMovieCard reviews={this.props.review} />
         <Example />
-      </div>
+        </div>
     )
   }
 }
+
 
 export default MovieCard;   
 

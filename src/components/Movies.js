@@ -14,35 +14,57 @@ class Movies extends Component {
   state = {
     reviews: [],
     test: false,
+    open: false
+  }
+
+  getData() {
+    fetch(URL)
+    .then(response => response.json())
+    .then(reviewsData => this.setState({ reviews: reviewsData.results }))
   }
 
   componentDidMount() {
-    fetch(URL)
-      .then(response => response.json())
-      .then(reviewsData => this.setState({ reviews: reviewsData.results }))
+   this.getData()  
   }
 
   handleSubmit = event => {
     event.preventDefault()
+    this.setState({open: true});
     this.fetchReviews(this.state.searchTerm) 
-    console.log("Input Value: ", this.input.current.value)
   }
 
   fetchReviews = (searchTerm) => {
     fetch(searchURL.concat(searchTerm))
         .then(res => res.json())
-        .then(data => this.setState({ reviews: data.results })); // array of objects
+        .then(data => this.setState({ reviews: data.results[0] })); // array of objects
   }
 
-
+  returnBtn = () => {
+      this.getData();  
+      this.setState({open: false, searchTerm: ''});
+  }
 
   render() {
-    const reviewCard = this.state.reviews.map(review => 
+    let reviewCard
+    if (Array.isArray(this.state.reviews) ) {
+     reviewCard = this.state.reviews.map(review => 
     <div className="test">
         <MovieCard  
         review={review} 
         />
-    </div>)  
+        {
+        this.state.open ? <button onClick={this.returnBtn}>Return</button> : null
+        }
+    </div>)
+      } else {
+        reviewCard = 
+        <div className="test">
+          <MovieCard  
+          review={this.state.reviews} 
+        />
+        <button onClick={this.returnBtn}>Return</button>
+    </div>
+      }
 
 return (
   <div>
